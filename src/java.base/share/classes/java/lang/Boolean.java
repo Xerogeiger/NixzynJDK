@@ -90,15 +90,7 @@ public final class Boolean implements java.io.Serializable,
      * {@code value} argument.
      *
      * @param   value   the value of the {@code Boolean}.
-     *
-     * @deprecated
-     * It is rarely appropriate to use this constructor. The static factory
-     * {@link #valueOf(boolean)} is generally a better choice, as it is
-     * likely to yield significantly better space and time performance.
-     * Also consider using the final fields {@link #TRUE} and {@link #FALSE}
-     * if possible.
      */
-    @Deprecated(since="9")
     public Boolean(boolean value) {
         this.value = value;
     }
@@ -111,12 +103,6 @@ public final class Boolean implements java.io.Serializable,
      * value {@code false}.
      *
      * @param   s   the string to be converted to a {@code Boolean}.
-     *
-     * @deprecated
-     * It is rarely appropriate to use this constructor.
-     * Use {@link #parseBoolean(String)} to convert a string to a
-     * {@code boolean} primitive, or use {@link #valueOf(String)}
-     * to convert a string to a {@code Boolean} object.
      */
     @Deprecated(since="9")
     public Boolean(String s) {

@@ -599,13 +599,7 @@ public final class Double extends Number
      * represents the primitive {@code double} argument.
      *
      * @param   value   the value to be represented by the {@code Double}.
-     *
-     * @deprecated
-     * It is rarely appropriate to use this constructor. The static factory
-     * {@link #valueOf(double)} is generally a better choice, as it is
-     * likely to yield significantly better space and time performance.
      */
-    @Deprecated(since="9")
     public Double(double value) {
         this.value = value;
     }
@@ -619,14 +613,7 @@ public final class Double extends Number
      * @param  s  a string to be converted to a {@code Double}.
      * @throws    NumberFormatException if the string does not contain a
      *            parsable number.
-     *
-     * @deprecated
-     * It is rarely appropriate to use this constructor.
-     * Use {@link #parseDouble(String)} to convert a string to a
-     * {@code double} primitive, or use {@link #valueOf(String)}
-     * to convert a string to a {@code Double} object.
      */
-    @Deprecated(since="9")
     public Double(String s) throws NumberFormatException {
         value = parseDouble(s);
     }

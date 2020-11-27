@@ -8495,13 +8495,7 @@ class Character implements java.io.Serializable, Comparable<Character>, Constabl
      *
      * @param  value   the value to be represented by the
      *                  {@code Character} object.
-     *
-     * @deprecated
-     * It is rarely appropriate to use this constructor. The static factory
-     * {@link #valueOf(char)} is generally a better choice, as it is
-     * likely to yield significantly better space and time performance.
      */
-    @Deprecated(since="9")
     public Character(char value) {
         this.value = value;
     }

@@ -1079,13 +1079,7 @@ public final class Integer extends Number
      *
      * @param   value   the value to be represented by the
      *                  {@code Integer} object.
-     *
-     * @deprecated
-     * It is rarely appropriate to use this constructor. The static factory
-     * {@link #valueOf(int)} is generally a better choice, as it is
-     * likely to yield significantly better space and time performance.
      */
-    @Deprecated(since="9")
     public Integer(int value) {
         this.value = value;
     }
@@ -1100,14 +1094,7 @@ public final class Integer extends Number
      * @param   s   the {@code String} to be converted to an {@code Integer}.
      * @throws      NumberFormatException if the {@code String} does not
      *              contain a parsable integer.
-     *
-     * @deprecated
-     * It is rarely appropriate to use this constructor.
-     * Use {@link #parseInt(String)} to convert a string to a
-     * {@code int} primitive, or use {@link #valueOf(String)}
-     * to convert a string to an {@code Integer} object.
      */
-    @Deprecated(since="9")
     public Integer(String s) throws NumberFormatException {
         this.value = parseInt(s, 10);
     }
