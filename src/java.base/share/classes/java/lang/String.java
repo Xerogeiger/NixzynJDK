@@ -1123,9 +1123,7 @@ public final class String
                 }
             }
         } else {
-            if (!StringUTF16.contentEquals(val, cs, n)) {
-                return false;
-            }
+            return StringUTF16.contentEquals(val, cs, n);
         }
         return true;
     }
