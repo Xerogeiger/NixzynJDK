@@ -1158,8 +1158,7 @@ public final class String
      * @see  #codePoints()
      */
     public boolean equalsIgnoreCase(String anotherString) {
-        return (this == anotherString) ? true
-                : (anotherString != null)
+        return this == anotherString || (anotherString != null)
                 && (anotherString.length() == length())
                 && regionMatches(true, 0, anotherString, 0, length());
     }
