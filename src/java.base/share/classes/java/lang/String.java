@@ -2425,12 +2425,83 @@ public final class String
     public static String join(CharSequence delimiter, CharSequence... elements) {
         Objects.requireNonNull(delimiter);
         Objects.requireNonNull(elements);
+
+        String delimiterStr = delimiter.toString();
+        int delimiterLen = delimiterStr.length();
+        String[] eleStr = new String[elements.length];
+        int coder = delimiterStr.coder;
+        int numOfChars = 0;
+
+        for(int x = 0; x < elements.length; x++) {
+            String str = String.valueOf(elements[x]);
+
+            if(str.coder == UTF16) {
+                coder = UTF16;
+            }
+
+            numOfChars += str.length();
+            numOfChars += delimiterLen;
+
+            eleStr[x] = str;
+        }
+
+        numOfChars -= delimiterLen; //Account for the x != 0 check not being there
+
+        if(coder == UTF16) {
+            byte[] joinedStr = new byte[numOfChars << 1];
+            byte[] delimArr;
+
+            if(delimiterStr.coder == UTF16) {
+                delimArr = delimiterStr.value;
+            } else {
+                delimArr = StringLatin1.inflate(delimiterStr.value, 0, delimiterLen);
+            }
+
+            int index = 0;
+            for(int i = 0; i < eleStr.length; i++) {
+                String str = eleStr[i];
+                if(i != 0) {
+                    System.arraycopy(delimArr, 0, joinedStr, index, delimArr.length);
+                    index += delimArr.length;
+                }
+
+                if(str.coder == LATIN1) {
+                    for(int x = 0; x < str.length(); x++) {
+                        joinedStr[index++] = 0x00;
+                        joinedStr[index++] = str.value[x];
+                    }
+                } else {
+                    byte[] bytes = str.value;
+                    System.arraycopy(bytes, 0, joinedStr, index, bytes.length);
+                    index += bytes.length;
+                }
+            }
+
+            return new String(joinedStr, UTF16);
+        } else { //All strings are LATIN1 so no inflating or deflating necessary
+            byte[] joinedStr = new byte[numOfChars];
+
+            int index = 0;
+            for(int i = 0; i < eleStr.length; i++) {
+                if(i != 0) {
+                    System.arraycopy(delimiterStr.value, 0, joinedStr, index, delimiterLen);
+                    index += delimiterStr.value.length;
+                }
+
+                byte[] bytes = eleStr[i].value;
+                System.arraycopy(bytes, 0, joinedStr, index, bytes.length);
+                index += bytes.length;
+            }
+
+            return new String(joinedStr, LATIN1);
+        }
+
         // Number of elements not likely worth Arrays.stream overhead.
-        StringJoiner joiner = new StringJoiner(delimiter);
+        /*StringJoiner joiner = new StringJoiner(delimiter);
         for (CharSequence cs: elements) {
             joiner.add(cs);
         }
-        return joiner.toString();
+        return joiner.toString();*/
     }
 
     /**
