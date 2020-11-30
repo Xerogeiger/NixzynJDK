@@ -1855,6 +1855,15 @@ public class ObjectStreamClass implements Serializable {
                 return Long.valueOf(f.getLong(null));
             }
         } catch (Exception ignored) {
+            try {
+                Field f = cl.getDeclaredField("SERIAL_VERSION_UID");
+                int mask = Modifier.STATIC | Modifier.FINAL;
+                if ((f.getModifiers() & mask) == mask) {
+                    f.setAccessible(true);
+                    return Long.valueOf(f.getLong(null));
+                }
+            } catch (Exception ignored1) {
+            }
         }
         return null;
     }
