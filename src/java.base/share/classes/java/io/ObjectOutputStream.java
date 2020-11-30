@@ -1086,12 +1086,12 @@ public class ObjectOutputStream
                             cl.getDeclaredMethod(
                                 "writeUnshared", new Class<?>[] { Object.class });
                             return Boolean.FALSE;
-                        } catch (NoSuchMethodException ex) {
+                        } catch (NoSuchMethodException ignored) {
                         }
                         try {
                             cl.getDeclaredMethod("putFields", (Class<?>[]) null);
                             return Boolean.FALSE;
-                        } catch (NoSuchMethodException ex) {
+                        } catch (NoSuchMethodException ignored) {
                         }
                     }
                     return Boolean.TRUE;
