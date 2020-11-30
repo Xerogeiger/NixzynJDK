@@ -1854,7 +1854,7 @@ public class ObjectStreamClass implements Serializable {
                 f.setAccessible(true);
                 return Long.valueOf(f.getLong(null));
             }
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
         return null;
     }
