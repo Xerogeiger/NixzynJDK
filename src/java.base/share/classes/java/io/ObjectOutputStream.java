@@ -1126,7 +1126,7 @@ public class ObjectOutputStream
                 writeHandle(h);
                 return;
             } else if (obj instanceof Class) {
-                writeClass((Class) obj, unshared);
+                writeClass((Class<?>) obj, unshared);
                 return;
             } else if (obj instanceof ObjectStreamClass) {
                 writeClassDesc((ObjectStreamClass) obj, unshared);
@@ -1168,7 +1168,7 @@ public class ObjectOutputStream
                     writeHandle(h);
                     return;
                 } else if (obj instanceof Class) {
-                    writeClass((Class) obj, unshared);
+                    writeClass((Class<?>) obj, unshared);
                     return;
                 } else if (obj instanceof ObjectStreamClass) {
                     writeClassDesc((ObjectStreamClass) obj, unshared);
