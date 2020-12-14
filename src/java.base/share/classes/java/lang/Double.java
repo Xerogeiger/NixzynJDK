@@ -46,11 +46,18 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
  * constants and methods useful when dealing with a
  * {@code double}.
  *
+ * <p>This is a <a href="{@docRoot}/java.base/java/lang/doc-files/ValueBased.html">value-based</a>
+ * class; programmers should treat instances that are
+ * {@linkplain #equals(Object) equal} as interchangeable and should not
+ * use instances for synchronization, or unpredictable behavior may
+ * occur. For example, in a future release, synchronization may fail.
+ *
  * @author  Lee Boynton
  * @author  Arthur van Hoff
  * @author  Joseph D. Darcy
  * @since 1.0
  */
+@jdk.internal.ValueBased
 public final class Double extends Number
         implements Comparable<Double>, Constable, ConstantDesc {
     /**
@@ -599,7 +606,13 @@ public final class Double extends Number
      * represents the primitive {@code double} argument.
      *
      * @param   value   the value to be represented by the {@code Double}.
+     *
+     * @deprecated
+     * It is rarely appropriate to use this constructor. The static factory
+     * {@link #valueOf(double)} is generally a better choice, as it is
+     * likely to yield significantly better space and time performance.
      */
+    @Deprecated(since="9", forRemoval = true)
     public Double(double value) {
         this.value = value;
     }
@@ -613,7 +626,14 @@ public final class Double extends Number
      * @param  s  a string to be converted to a {@code Double}.
      * @throws    NumberFormatException if the string does not contain a
      *            parsable number.
+     *
+     * @deprecated
+     * It is rarely appropriate to use this constructor.
+     * Use {@link #parseDouble(String)} to convert a string to a
+     * {@code double} primitive, or use {@link #valueOf(String)}
+     * to convert a string to a {@code Double} object.
      */
+    @Deprecated(since="9", forRemoval = true)
     public Double(String s) throws NumberFormatException {
         value = parseDouble(s);
     }

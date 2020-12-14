@@ -41,16 +41,23 @@ import static java.lang.constant.ConstantDescs.CD_Boolean;
  * {@code boolean} in an object. An object of type
  * {@code Boolean} contains a single field whose type is
  * {@code boolean}.
- * <p>
- * In addition, this class provides many methods for
+ *
+ * <p>In addition, this class provides many methods for
  * converting a {@code boolean} to a {@code String} and a
  * {@code String} to a {@code boolean}, as well as other
  * constants and methods useful when dealing with a
  * {@code boolean}.
  *
+ * <p>This is a <a href="{@docRoot}/java.base/java/lang/doc-files/ValueBased.html">value-based</a>
+ * class; programmers should treat instances that are
+ * {@linkplain #equals(Object) equal} as interchangeable and should not
+ * use instances for synchronization, or unpredictable behavior may
+ * occur. For example, in a future release, synchronization may fail.
+ *
  * @author  Arthur van Hoff
  * @since   1.0
  */
+@jdk.internal.ValueBased
 public final class Boolean implements java.io.Serializable,
                                       Comparable<Boolean>, Constable
 {
@@ -90,7 +97,15 @@ public final class Boolean implements java.io.Serializable,
      * {@code value} argument.
      *
      * @param   value   the value of the {@code Boolean}.
+     *
+     * @deprecated
+     * It is rarely appropriate to use this constructor. The static factory
+     * {@link #valueOf(boolean)} is generally a better choice, as it is
+     * likely to yield significantly better space and time performance.
+     * Also consider using the final fields {@link #TRUE} and {@link #FALSE}
+     * if possible.
      */
+    @Deprecated(since="9", forRemoval = true)
     public Boolean(boolean value) {
         this.value = value;
     }
@@ -103,8 +118,14 @@ public final class Boolean implements java.io.Serializable,
      * value {@code false}.
      *
      * @param   s   the string to be converted to a {@code Boolean}.
+     *
+     * @deprecated
+     * It is rarely appropriate to use this constructor.
+     * Use {@link #parseBoolean(String)} to convert a string to a
+     * {@code boolean} primitive, or use {@link #valueOf(String)}
+     * to convert a string to a {@code Boolean} object.
      */
-    @Deprecated(since="9")
+    @Deprecated(since="9", forRemoval = true)
     public Boolean(String s) {
         this(parseBoolean(s));
     }
