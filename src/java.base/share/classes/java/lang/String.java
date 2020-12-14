@@ -3727,10 +3727,15 @@ public final class String
         }
     }
 
-   /*
-    * Package private constructor which shares value array for speed.
-    */
-    String(byte[] value, byte coder) {
+    /**
+     * Constructs a new String from the provided coder and {@code byte} array.
+     * It is very important to abandon this {@code byte} array after calling this constructor.
+     * This method does no checks on the provided values for the sake of speed so be careful when using it.
+     *
+     * @param value the byte array of the {@code String}
+     * @param coder the coder of the {@code String}
+     */
+    public String(byte[] value, byte coder) {
         this.value = value;
         this.coder = coder;
     }
@@ -3851,4 +3856,23 @@ public final class String
         return this;
     }
 
+    /**
+     * Returns the shared bytes in this {@code String}, they should never be edited
+     *
+     * @return the shared {@code byte} array in this {@code String}
+     */
+    public byte[] getSharedBytes() {
+        return value;
+    }
+
+    /**
+     * Returns the stored coder in this {@code String}
+     * Latin1 - 1 byte characters
+     * UTF-16 - 2 byte characters
+     *
+     * @return the stored coder in this {@code String}
+     */
+    public byte getCoder() {
+        return coder;
+    }
 }
