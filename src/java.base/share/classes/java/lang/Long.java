@@ -50,6 +50,12 @@ import static java.lang.String.UTF16;
  * long}, as well as other constants and methods useful when dealing
  * with a {@code long}.
  *
+ * <p>This is a <a href="{@docRoot}/java.base/java/lang/doc-files/ValueBased.html">value-based</a>
+ * class; programmers should treat instances that are
+ * {@linkplain #equals(Object) equal} as interchangeable and should not
+ * use instances for synchronization, or unpredictable behavior may
+ * occur. For example, in a future release, synchronization may fail.
+ *
  * <p>Implementation note: The implementations of the "bit twiddling"
  * methods (such as {@link #highestOneBit(long) highestOneBit} and
  * {@link #numberOfTrailingZeros(long) numberOfTrailingZeros}) are
@@ -62,6 +68,7 @@ import static java.lang.String.UTF16;
  * @author  Joseph D. Darcy
  * @since   1.0
  */
+@jdk.internal.ValueBased
 public final class Long extends Number
         implements Comparable<Long>, Constable, ConstantDesc {
     /**
@@ -1310,7 +1317,13 @@ public final class Long extends Number
      *
      * @param   value   the value to be represented by the
      *          {@code Long} object.
+     *
+     * @deprecated
+     * It is rarely appropriate to use this constructor. The static factory
+     * {@link #valueOf(long)} is generally a better choice, as it is
+     * likely to yield significantly better space and time performance.
      */
+    @Deprecated(since="9", forRemoval = true)
     public Long(long value) {
         this.value = value;
     }
@@ -1326,7 +1339,14 @@ public final class Long extends Number
      *             {@code Long}.
      * @throws     NumberFormatException  if the {@code String} does not
      *             contain a parsable {@code long}.
+     *
+     * @deprecated
+     * It is rarely appropriate to use this constructor.
+     * Use {@link #parseLong(String)} to convert a string to a
+     * {@code long} primitive, or use {@link #valueOf(String)}
+     * to convert a string to a {@code Long} object.
      */
+    @Deprecated(since="9", forRemoval = true)
     public Long(String s) throws NumberFormatException {
         this.value = parseLong(s, 10);
     }
